@@ -1,0 +1,11 @@
+test_cliente_validacion (test_software_fj.SoftwareFJTests.test_cliente_validacion) ... ok
+test_descuento (test_software_fj.SoftwareFJTests.test_descuento) ... ok
+test_equipo_reserva_liberacion (test_software_fj.SoftwareFJTests.test_equipo_reserva_liberacion) ... ok
+test_inventario_insuficiente (test_software_fj.SoftwareFJTests.test_inventario_insuficiente) ... ok
+test_reserva_estados (test_software_fj.SoftwareFJTests.test_reserva_estados) ... ok
+test_sala_coste_y_limite (test_software_fj.SoftwareFJTests.test_sala_coste_y_limite) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.000s
+
+OK

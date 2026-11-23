@@ -1,0 +1,88 @@
+
+--- 1. Crear cliente válido ---
+Cliente C001: Ana Torres (ana@example.com)
+Operación finalizada.
+
+--- 2. Crear segundo cliente ---
+Cliente C002: Luis Pérez (luis@example.com)
+Operación finalizada.
+
+--- 3. Cliente con correo inválido ---
+Error controlado: El correo no tiene un formato válido.
+Operación finalizada.
+
+--- 4. Registrar sala ---
+Sala: Sala de reuniones | $80,000.00/hora | máximo 12 horas
+Operación finalizada.
+
+--- 5. Registrar equipos ---
+Equipo: Proyector | $50,000.00/unidad | disponibles 5/5
+Operación finalizada.
+
+--- 6. Registrar asesoría ---
+Consultoría: Consultoría de software | $120,000.00/hora | máximo 40 horas
+Operación finalizada.
+
+--- 7. Reserva de sala ---
+Reserva R001: Ana Torres -> Sala de reuniones; unidades=3, costo=$240,000.00, estado=Pendiente
+Operación finalizada.
+
+--- 8. Reserva de equipos ---
+Reserva R002: Luis Pérez -> Proyector; unidades=2, costo=$100,000.00, estado=Pendiente
+Operación finalizada.
+
+--- 9. Reserva de asesoría con descuento ---
+Reserva R003: Ana Torres -> Consultoría de software; unidades=2, costo=$216,000.00, estado=Pendiente
+Operación finalizada.
+
+--- 10. Confirmar reserva de equipos ---
+Reserva R002: Luis Pérez -> Proyector; unidades=2, costo=$100,000.00, estado=Confirmada
+Operación finalizada.
+
+--- 11. Intento de exceso de horas ---
+Error controlado: La sala admite entre 1 y 12 horas por reserva.
+Operación finalizada.
+
+--- 12. Reserva de más equipos que inventario ---
+Error controlado: Solo hay 3 unidades disponibles.
+Operación finalizada.
+
+--- 13. Buscar cliente inexistente ---
+Error controlado: No se encontró cliente C999.
+Operación finalizada.
+
+--- 14. Cancelar reserva de equipos y liberar inventario ---
+Reserva R002: Luis Pérez -> Proyector; unidades=2, costo=$100,000.00, estado=Cancelada
+Operación finalizada.
+
+--- 15. Confirmar reserva de sala ---
+Reserva R001: Ana Torres -> Sala de reuniones; unidades=3, costo=$240,000.00, estado=Confirmada
+Operación finalizada.
+
+--- 16. Procesar reserva confirmada ---
+Reserva R001: Ana Torres -> Sala de reuniones; unidades=3, costo=$240,000.00, estado=Procesada
+Operación finalizada.
+
+--- 17. Intentar procesar reserva pendiente ---
+Error controlado: Solo se pueden procesar reservas confirmadas.
+Operación finalizada.
+
+--- 18. Intentar registrar cliente duplicado ---
+Error controlado: Ya existe el cliente C001.
+Operación finalizada.
+
+--- 19. Cancelar reserva pendiente ---
+Reserva R003: Ana Torres -> Consultoría de software; unidades=2, costo=$216,000.00, estado=Cancelada
+Operación finalizada.
+
+--- 20. Listar reservas ---
+Reserva R001: Ana Torres -> Sala de reuniones; unidades=3, costo=$240,000.00, estado=Procesada
+Reserva R002: Luis Pérez -> Proyector; unidades=2, costo=$100,000.00, estado=Cancelada
+Reserva R003: Ana Torres -> Consultoría de software; unidades=2, costo=$216,000.00, estado=Cancelada
+Operación finalizada.
+
+--- 21. Disponibilidad de equipos al cierre ---
+Equipo: Proyector | $50,000.00/unidad | disponibles 5/5
+Operación finalizada.
+
+Demostración terminada. Consulte software_fj.log para el registro de eventos.

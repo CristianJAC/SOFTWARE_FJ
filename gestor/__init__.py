@@ -1,0 +1,1 @@
+"""Gestión central de operaciones."""

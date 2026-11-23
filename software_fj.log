@@ -1,0 +1,180 @@
+2026-11-23 00:43:57,237 | INFO | Sistema gestor iniciado.
+2026-11-23 00:43:57,237 | INFO | Cliente registrado: C001
+2026-11-23 00:43:57,237 | INFO | Cliente registrado: C002
+2026-11-23 00:43:57,237 | ERROR | Error controlado durante 3. Cliente con correo inválido
+Traceback (most recent call last):
+  File "/mnt/data/Software_FJ/main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "/mnt/data/Software_FJ/main.py", line 37, in <lambda>
+    ejecutar_operacion("3. Cliente con correo inválido", lambda: Cliente("C003", "Cliente Prueba", "correo-invalido", "3001234567"))
+                                                                 ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/Software_FJ/modelos/cliente.py", line 9, in __init__
+    self.correo = correo
+    ^^^^^^^^^^^
+  File "/mnt/data/Software_FJ/modelos/cliente.py", line 27, in correo
+    raise DatosInvalidosError("El correo no tiene un formato válido.")
+excepciones.errores.DatosInvalidosError: El correo no tiene un formato válido.
+2026-11-23 00:43:57,238 | INFO | Servicio registrado: S001
+2026-11-23 00:43:57,238 | INFO | Servicio registrado: S002
+2026-11-23 00:43:57,238 | INFO | Servicio registrado: S003
+2026-11-23 00:43:57,238 | INFO | Reserva creada: R001
+2026-11-23 00:43:57,238 | INFO | Reserva creada: R002
+2026-11-23 00:43:57,238 | INFO | Reserva creada: R003
+2026-11-23 00:43:57,238 | INFO | Reserva confirmada: R002
+2026-11-23 00:43:57,238 | ERROR | Error controlado durante 11. Intento de exceso de horas
+Traceback (most recent call last):
+  File "/mnt/data/Software_FJ/main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "/mnt/data/Software_FJ/main.py", line 48, in <lambda>
+    ejecutar_operacion("11. Intento de exceso de horas", lambda: sistema.crear_reserva("R004", "C001", "S001", 20))
+                                                                 ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/Software_FJ/gestor/sistema_gestor.py", line 43, in crear_reserva
+    servicio.validar_disponibilidad(unidades)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/mnt/data/Software_FJ/servicios/sala.py", line 12, in validar_disponibilidad
+    raise ServicioNoDisponibleError(f"La sala admite entre 1 y {self.horas_maximas} horas por reserva.")
+excepciones.errores.ServicioNoDisponibleError: La sala admite entre 1 y 12 horas por reserva.
+2026-11-23 00:43:57,239 | ERROR | Error controlado durante 12. Reserva de más equipos que inventario
+Traceback (most recent call last):
+  File "/mnt/data/Software_FJ/main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "/mnt/data/Software_FJ/main.py", line 49, in <lambda>
+    ejecutar_operacion("12. Reserva de más equipos que inventario", lambda: sistema.crear_reserva("R005", "C001", "S002", 10))
+                                                                            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/Software_FJ/gestor/sistema_gestor.py", line 43, in crear_reserva
+    servicio.validar_disponibilidad(unidades)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/mnt/data/Software_FJ/servicios/equipo.py", line 17, in validar_disponibilidad
+    raise ServicioNoDisponibleError(f"Solo hay {self.disponibles} unidades disponibles.")
+excepciones.errores.ServicioNoDisponibleError: Solo hay 3 unidades disponibles.
+2026-11-23 00:43:57,240 | ERROR | Error controlado durante 13. Buscar cliente inexistente
+LookupError: Identificador C999 no localizado en la lista interna.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/Software_FJ/main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "/mnt/data/Software_FJ/main.py", line 50, in <lambda>
+    ejecutar_operacion("13. Buscar cliente inexistente", lambda: sistema.buscar_cliente("C999"))
+                                                                 ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/mnt/data/Software_FJ/gestor/sistema_gestor.py", line 31, in buscar_cliente
+    raise ClienteError(f"No se encontró cliente {identificador}.") from LookupError(f"Identificador {identificador} no localizado en la lista interna.")
+excepciones.errores.ClienteError: No se encontró cliente C999.
+2026-11-23 00:43:57,240 | INFO | Reserva cancelada: R002
+2026-11-23 00:43:57,240 | INFO | Reserva confirmada: R001
+2026-11-23 00:43:57,240 | INFO | Reserva procesada: R001
+2026-11-23 00:43:57,240 | ERROR | Error controlado durante 17. Intentar procesar reserva pendiente
+Traceback (most recent call last):
+  File "/mnt/data/Software_FJ/main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "/mnt/data/Software_FJ/main.py", line 55, in <lambda>
+    ejecutar_operacion("17. Intentar procesar reserva pendiente", lambda: sistema.procesar_reserva("R003"))
+                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "/mnt/data/Software_FJ/gestor/sistema_gestor.py", line 67, in procesar_reserva
+    reserva.procesar()
+    ~~~~~~~~~~~~~~~~^^
+  File "/mnt/data/Software_FJ/modelos/reserva.py", line 38, in procesar
+    raise ReservaError("Solo se pueden procesar reservas confirmadas.")
+excepciones.errores.ReservaError: Solo se pueden procesar reservas confirmadas.
+2026-11-23 00:43:57,240 | ERROR | Error controlado durante 18. Intentar registrar cliente duplicado
+Traceback (most recent call last):
+  File "/mnt/data/Software_FJ/main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "/mnt/data/Software_FJ/main.py", line 56, in <lambda>
+    ejecutar_operacion("18. Intentar registrar cliente duplicado", lambda: sistema.registrar_cliente(Cliente("C001", "Ana duplicada", "ana2@example.com", "3009876543")))
+                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/Software_FJ/gestor/sistema_gestor.py", line 15, in registrar_cliente
+    raise ClienteError(f"Ya existe el cliente {cliente.identificador}.")
+excepciones.errores.ClienteError: Ya existe el cliente C001.
+2026-11-23 00:43:57,241 | INFO | Reserva cancelada: R003
+2026-11-22 19:54:05,581 | INFO | Sistema gestor iniciado.
+2026-11-22 19:54:05,582 | INFO | Cliente registrado: C001
+2026-11-22 19:54:05,582 | INFO | Cliente registrado: C002
+2026-11-22 19:54:05,582 | ERROR | Error controlado durante 3. Cliente con correo inválido
+Traceback (most recent call last):
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 37, in <lambda>
+    ejecutar_operacion("3. Cliente con correo inválido", lambda: Cliente("C003", "Cliente Prueba", "correo-invalido", "3001234567"))
+                                                                 ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\modelos\cliente.py", line 9, in __init__
+    self.correo = correo
+    ^^^^^^^^^^^
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\modelos\cliente.py", line 27, in correo
+    raise DatosInvalidosError("El correo no tiene un formato válido.")
+excepciones.errores.DatosInvalidosError: El correo no tiene un formato válido.
+2026-11-22 19:54:05,598 | INFO | Servicio registrado: S001
+2026-11-22 19:54:05,598 | INFO | Servicio registrado: S002
+2026-11-22 19:54:05,598 | INFO | Servicio registrado: S003
+2026-11-22 19:54:05,599 | INFO | Reserva creada: R001
+2026-11-22 19:54:05,599 | INFO | Reserva creada: R002
+2026-11-22 19:54:05,599 | INFO | Reserva creada: R003
+2026-11-22 19:54:05,599 | INFO | Reserva confirmada: R002
+2026-11-22 19:54:05,599 | ERROR | Error controlado durante 11. Intento de exceso de horas
+Traceback (most recent call last):
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 48, in <lambda>
+    ejecutar_operacion("11. Intento de exceso de horas", lambda: sistema.crear_reserva("R004", "C001", "S001", 20))
+                                                                 ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\gestor\sistema_gestor.py", line 43, in crear_reserva
+    servicio.validar_disponibilidad(unidades)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\servicios\sala.py", line 12, in validar_disponibilidad
+    raise ServicioNoDisponibleError(f"La sala admite entre 1 y {self.horas_maximas} horas por reserva.")
+excepciones.errores.ServicioNoDisponibleError: La sala admite entre 1 y 12 horas por reserva.
+2026-11-22 19:54:05,602 | ERROR | Error controlado durante 12. Reserva de más equipos que inventario
+Traceback (most recent call last):
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 49, in <lambda>
+    ejecutar_operacion("12. Reserva de más equipos que inventario", lambda: sistema.crear_reserva("R005", "C001", "S002", 10))
+                                                                            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\gestor\sistema_gestor.py", line 43, in crear_reserva
+    servicio.validar_disponibilidad(unidades)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\servicios\equipo.py", line 17, in validar_disponibilidad
+    raise ServicioNoDisponibleError(f"Solo hay {self.disponibles} unidades disponibles.")
+excepciones.errores.ServicioNoDisponibleError: Solo hay 3 unidades disponibles.
+2026-11-22 19:54:05,604 | ERROR | Error controlado durante 13. Buscar cliente inexistente
+LookupError: Identificador C999 no localizado en la lista interna.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 50, in <lambda>
+    ejecutar_operacion("13. Buscar cliente inexistente", lambda: sistema.buscar_cliente("C999"))
+                                                                 ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\gestor\sistema_gestor.py", line 31, in buscar_cliente
+    raise ClienteError(f"No se encontró cliente {identificador}.") from LookupError(f"Identificador {identificador} no localizado en la lista interna.")
+excepciones.errores.ClienteError: No se encontró cliente C999.
+2026-11-22 19:54:05,606 | INFO | Reserva cancelada: R002
+2026-11-22 19:54:05,606 | INFO | Reserva confirmada: R001
+2026-11-22 19:54:05,606 | INFO | Reserva procesada: R001
+2026-11-22 19:54:05,607 | ERROR | Error controlado durante 17. Intentar procesar reserva pendiente
+Traceback (most recent call last):
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 55, in <lambda>
+    ejecutar_operacion("17. Intentar procesar reserva pendiente", lambda: sistema.procesar_reserva("R003"))
+                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\gestor\sistema_gestor.py", line 67, in procesar_reserva
+    reserva.procesar()
+    ~~~~~~~~~~~~~~~~^^
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\modelos\reserva.py", line 38, in procesar
+    raise ReservaError("Solo se pueden procesar reservas confirmadas.")
+excepciones.errores.ReservaError: Solo se pueden procesar reservas confirmadas.
+2026-11-22 19:54:05,608 | ERROR | Error controlado durante 18. Intentar registrar cliente duplicado
+Traceback (most recent call last):
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 18, in ejecutar_operacion
+    resultado = funcion()
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\main.py", line 56, in <lambda>
+    ejecutar_operacion("18. Intentar registrar cliente duplicado", lambda: sistema.registrar_cliente(Cliente("C001", "Ana duplicada", "ana2@example.com", "3009876543")))
+                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\User\Documents\AI(SISTEMAS)\UNAD2(2026)\PROGRAMACION\Fase4\Software_FJ\gestor\sistema_gestor.py", line 15, in registrar_cliente
+    raise ClienteError(f"Ya existe el cliente {cliente.identificador}.")
+excepciones.errores.ClienteError: Ya existe el cliente C001.
+2026-11-22 19:54:05,610 | INFO | Reserva cancelada: R003
